@@ -10,9 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import serverCommand.*;
-
-import serverMainPackage.User;
+import serverRequest.RequestLIST;
 
 
 public class ServerRequest implements Runnable {
@@ -23,9 +21,6 @@ public class ServerRequest implements Runnable {
 	public DataInputStream dataReader;
 	public DataOutputStream dataWriter;
 	private ArrayList<String> gameList;
-	private Receiver receiver;
-	private Invoker invoker;
-	private User user;
 	
 
 	public ServerRequest (Socket socket)
@@ -51,26 +46,6 @@ public class ServerRequest implements Runnable {
 		this.gameList.add("Isola");
 		this.gameList.add("Morpion");
 	}
-
-
-	public void initCommands ()
-	{
-		this.receiver = new Receiver();
-		
-		Command cmdList = new CommandList (receiver, this);
-		Command cmdCreate = new CommandCreate (receiver, this);
-		Command cmdJoin = new CommandJoin (receiver, this);
-		Command cmdLeave = new CommandLeave (receiver, this);
-		Command cmdExitServ = new CommandExit (receiver, this);
-
-		this.invoker = new Invoker();
-		
-		this.invoker.setCmdList (cmdList);
-		this.invoker.setCmdCreate (cmdCreate);
-		this.invoker.setCmdJoin (cmdJoin);
-		this.invoker.setCmdLeave (cmdLeave);
-		this.invoker.setCmdExitServ (cmdExitServ);
-	}
 	
 	
 	public void run ()
@@ -78,7 +53,6 @@ public class ServerRequest implements Runnable {
 		try
 		{
 			this.initGameList();
-			this.initCommands();
 			
 			this.processRequest();
 		}
@@ -103,35 +77,8 @@ public class ServerRequest implements Runnable {
 		String input;
 		while ((input = reader.readLine()) != "exit")
 		{
-			{
-				switch (input)
-				{
-				case ("list"):
-					this.invoker.invokeList();
-					break;
-					
-				case ("join"):
-					this.invoker.invokeJoin();
-					break;
-					
-				case("create"):
-					this.invoker.invokeCreate();
-					break;
-					
-				case("leave"):
-					this.invoker.invokeLeave();
-					break;
-					
-				case ("exit"):
-					this.invoker.invokeExitServ();
-					break;
-					
-				default:
-					System.out.println("Not yet implemented !");
-					break;
-				}
-				
-			}
+			String request[] = input.split("//s");
+			new RequestLIST().processRequest (request, this);
 		}
 
 	}
@@ -183,20 +130,26 @@ public class ServerRequest implements Runnable {
 		this.dataWriter = dataWriter;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
 	public ArrayList<String> getGameList() {
 		return gameList;
 	}
 
-
 	public void setGameList(ArrayList<String> gameList) {
 		this.gameList = gameList;
 	}
+	
+	public boolean gotTheGame (String game)	{
+		for (String s : this.gameList)	{
+			if (game.equals(s))
+				return true;
+		}
+		return false;
+	}
+	
+	public void listTheGame ()	{
+		for (String s : this.gameList)
+			System.out.println (s);
+	}
+	
+	
 }
