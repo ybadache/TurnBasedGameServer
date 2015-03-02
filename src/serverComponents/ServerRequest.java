@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import serverRequest.RequestLIST;
+import serverRequest.RequestCreation;
 
 
 public class ServerRequest implements Runnable {
@@ -21,6 +21,7 @@ public class ServerRequest implements Runnable {
 	public DataInputStream dataReader;
 	public DataOutputStream dataWriter;
 	private ArrayList<String> gameList;
+	public String query[];
 	
 
 	public ServerRequest (Socket socket)
@@ -77,8 +78,8 @@ public class ServerRequest implements Runnable {
 		String input;
 		while ((input = reader.readLine()) != "exit")
 		{
-			String request[] = input.split("//s");
-			new RequestLIST().processRequest (request, this);
+			this.query = input.split("//s");
+			new RequestCreation().createRequest(this);
 		}
 
 	}
@@ -146,9 +147,12 @@ public class ServerRequest implements Runnable {
 		return false;
 	}
 	
-	public void listTheGame ()	{
+	public String listTheGame ()	{
+		String list = null;
 		for (String s : this.gameList)
-			System.out.println (s);
+			list = list + s + ("\n");
+		
+		return list;
 	}
 	
 	

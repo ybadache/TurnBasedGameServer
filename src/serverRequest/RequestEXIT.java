@@ -6,21 +6,18 @@ public class RequestEXIT implements Request
 {
 
 	@Override
-	public void processRequest(String[] query, ServerRequest request)
+	public void processRequest(ServerRequest request)
 	{
-		if (!(query[0].equals("EXIT")))
-		{
-			this.successor(query, request);
-			return;
+		try {
+			request.requestSocket.close();
+			request.dataWriter.close();
+			request.dataWriter.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();	
 		}
-	
-		System.out.println("Exit !");
-	}
-
-	@Override
-	public void successor(String[] query, ServerRequest request)
-	{
 		
+		request.writer.println("Exit !");
+		return;
 	}
-
 }
