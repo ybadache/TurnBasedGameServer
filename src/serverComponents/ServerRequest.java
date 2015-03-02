@@ -5,7 +5,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -31,9 +30,11 @@ public class ServerRequest implements Runnable {
 		try
 		{
 			this.reader = new BufferedReader (new InputStreamReader (this.requestSocket.getInputStream()));
-			this.writer = new PrintWriter (new OutputStreamWriter (this.requestSocket.getOutputStream()), true);
+			this.writer = new PrintWriter (this.requestSocket.getOutputStream());
 			this.writer.println ("[SERVER] Game service ready !");
-		}
+			this.writer.flush();
+		}	
+		
 		catch (IOException e)
 		{
 			e.printStackTrace();
@@ -78,6 +79,7 @@ public class ServerRequest implements Runnable {
 		String input;
 		while ((input = reader.readLine()) != "exit")
 		{
+			System.out.println ("Message envoyé = " + input);
 			this.query = input.split("//s");
 			new RequestCreation().createRequest(this);
 		}
@@ -148,9 +150,9 @@ public class ServerRequest implements Runnable {
 	}
 	
 	public String listTheGame ()	{
-		String list = null;
+		String list = "";
 		for (String s : this.gameList)
-			list = list + s + ("\n");
+			list = list + s + (" - ");
 		
 		return list;
 	}
