@@ -34,6 +34,11 @@ public class RequestCreation {
 				new RequestEXIT().processRequest(request);
 				break;
 				
+			case ("help"):
+				System.out.println("help request");
+				new RequestHELP().processRequest(request);
+				break;
+				
 			default:
 				System.out.println ("nyi request");
 				new RequestNYI().processRequest(request);
