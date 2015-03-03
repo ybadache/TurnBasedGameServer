@@ -5,36 +5,38 @@ public class RequestCreation {
 
 	public void createRequest (ServerRequest request)
 	{
+		System.out.println (request.query[0]);
+		
 		switch (request.query[0])
 		{
 			case("list"):
-				new RequestLIST().processRequest(request);
-			System.out.println ("list request");
+				System.out.println ("list request");
+				new RequestLIST().processRequest(request);			
 				break;
 				
 			case("create"):
-				new RequestCREATE().processRequest(request);
-			System.out.println ("create request");
+				System.out.println ("create request");
+				new RequestCREATE().processRequest(request);			
 				break;
 				
 			case("join"):
+				System.out.println ("join request");
 				new RequestJOIN().processRequest(request);
-			System.out.println ("join request");
 				break;
 				
 			case("leave"):
+				System.out.println ("leave request");
 				new RequestLEAVE().processRequest(request);
-			System.out.println ("leave request");
 				break;
 				
 			case("exit"):
+				System.out.println ("exit request");
 				new RequestEXIT().processRequest(request);
-			System.out.println ("exit request");
 				break;
 				
 			default:
-				new RequestNYI().processRequest(request);
 				System.out.println ("nyi request");
+				new RequestNYI().processRequest(request);
 				break;
 		}
 		

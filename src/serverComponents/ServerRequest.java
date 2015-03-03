@@ -20,7 +20,7 @@ public class ServerRequest implements Runnable {
 	public DataInputStream dataReader;
 	public DataOutputStream dataWriter;
 	private ArrayList<String> gameList;
-	public String query[];
+	public String[] query;
 	
 
 	public ServerRequest (Socket socket)
@@ -80,7 +80,7 @@ public class ServerRequest implements Runnable {
 		while ((input = reader.readLine()) != "exit")
 		{
 			System.out.println ("Message envoyé = " + input);
-			this.query = input.split("//s");
+			this.query = input.split("\\s+");
 			new RequestCreation().createRequest(this);
 		}
 
