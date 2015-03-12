@@ -9,16 +9,13 @@ public class RequestCREATE implements Request
 	public void processRequest(ServerRequest request)
 	{	
 		
-		request.writer.println("Entering game request !");
-		request.writer.flush();
-		
 		if (!(request.query[1].isEmpty()))
 		{
 			switch (request.query[1])
 			{
 				case ("tictactoe"):
 					TicTacToeHost tictactoe = new TicTacToeHost();
-					tictactoe.playGame();
+					tictactoe.playGame(request);
 					break;
 					
 				/* case("isola"):

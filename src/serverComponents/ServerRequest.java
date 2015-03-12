@@ -79,7 +79,6 @@ public class ServerRequest implements Runnable {
 		String input;
 		while ((input = reader.readLine()) != "exit")
 		{
-			System.out.println ("Message envoyé = " + input);
 			this.query = input.split("\\s+");
 			new RequestCreation().createRequest(this);
 		}

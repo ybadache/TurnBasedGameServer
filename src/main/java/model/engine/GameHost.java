@@ -22,13 +22,14 @@ package main.java.model.engine;
 
 import java.util.List;
 
+import serverComponents.ServerRequest;
+import main.java.clients.ClientFactory;
+import main.java.clients.ClientInterface;
 import main.java.model.Game;
 import main.java.model.exceptions.GameException;
 import main.java.model.moves.Move;
 import main.java.model.moves.MoveFactory;
 import main.java.model.players.Player;
-import main.java.clients.ClientFactory;
-import main.java.clients.ClientInterface;
 
 /**
  * Hosts the game :</br>
@@ -80,21 +81,24 @@ public abstract class GameHost<G extends Game> {
 	/**
 	 * Plays the game.
 	 */
-	public void playGame() {
+	public void playGame(ServerRequest servRequest) {
 		while (!game.isFinished()) {
 			boolean correctMove = false;	
 			do {
 				Player player = game.getCurrentPlayer();
 				try {
 					// Create move from the message
-					String msg = this.clientInterface.receiveMessage(player);
+					
+					String msg = this.clientInterface.receiveMessage(player, servRequest);
 					Move<G> move = (Move<G>)(this.firstMoveFactory.receive(msg));
 					// Play move
+					System.out.println("Joue le move");
 					game.play(move, player);
 					correctMove = true;
-					this.clientInterface.sendPlayedMove(move.getDescription(), player);
+					System.out.println("Envoie le move");
+					this.clientInterface.sendPlayedMove(move.getDescription(), player, servRequest);
 				} catch (GameException e) {
-					this.clientInterface.sendError(e.getErrorCode(), player);
+					this.clientInterface.sendError(e.getErrorCode(), player, servRequest);
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.exit(0);
@@ -102,7 +106,7 @@ public abstract class GameHost<G extends Game> {
 			} while (!correctMove);
 		}
 		// The game is finished
-		this.clientInterface.sendEnd(game.getWinners());
-		this.clientInterface.closeConnections();
+		this.clientInterface.sendEnd(game.getWinners(), servRequest);
+		this.clientInterface.closeConnections(servRequest);
 	}
 }

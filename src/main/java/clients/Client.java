@@ -20,6 +20,8 @@
 
 package main.java.clients;
 
+import serverComponents.ServerRequest;
+
 /**
  * Represents an abstraction of the clients in the game.
  * 
@@ -32,16 +34,17 @@ public interface Client {
 	 * @param receivedMessage message received from the game
 	 * @return the client's answer
 	 */
-	public String sendMessageWithAnswer(String receivedMessage);
+	public String sendMessageWithAnswer(String receivedMessage, ServerRequest servRequest);
 	
 	/**
 	 * Tranfers a message from the game to the client.
 	 * @param message message received from the game
 	 */
-	public void sendMessage(String message);
+	public void sendMessage(String message, ServerRequest servRequest);
 	
 	/**
 	 * Closes the connection of the client.
 	 */
-	public void closeConnection();
+	public void closeConnection(ServerRequest servRequest);
+
 }

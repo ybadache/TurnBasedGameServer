@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Set;
 
 import main.java.model.players.Player;
+import serverComponents.ServerRequest;
 
 /**
  * Manages the communication with the clients.
@@ -68,9 +69,10 @@ public class ClientInterface {
 	 * @param player the player corresponding to the client to whom the game wants a answer.
 	 * @return the client's answer
 	 */
-	public String receiveMessage(Player player) {
+	public String receiveMessage(Player player, ServerRequest servRequest) {
 		Client client = this.playersToClients.get(player);
-		return client.sendMessageWithAnswer("play");
+		System.out.println("Au joueur" + player.getName() + " - Envoie le 'play' ?");
+		return client.sendMessageWithAnswer ("play", servRequest);
 	}
 	
 	/**
@@ -78,10 +80,10 @@ public class ClientInterface {
 	 * @param moveDescription description of the played move
 	 * @param player the play who played this move
 	 */
-	public void sendPlayedMove(String moveDescription, Player player) {
+	public void sendPlayedMove(String moveDescription, Player player, ServerRequest servRequest) {
 		Collection<Client> clients = this.playersToClients.values();
 		for (Client client : clients) {
-			client.sendMessage("move " + player + " " + moveDescription);
+			client.sendMessage("move " + player + " " + moveDescription, servRequest);
 		}
 	}
 	
@@ -90,16 +92,16 @@ public class ClientInterface {
 	 * @param i the error code
 	 * @param player the player who provoked this error
 	 */
-	public void sendError(int i, Player player) {
+	public void sendError(int i, Player player, ServerRequest servRequest) {
 		Client client = this.playersToClients.get(player);
-		client.sendMessage("error " + i);
+		client.sendMessage("error " + i, servRequest);
 	}
 	
 	/**
 	 * Tells all the clients that the game is finished and who won it.
 	 * @param winners all the players that won the game
 	 */
-	public void sendEnd(Set<Player> winners) {
+	public void sendEnd(Set<Player> winners, ServerRequest servRequest) {
 		// Preparation of the list of winners
 		StringBuilder winnersList = new StringBuilder();
 		for (Player player : winners) {
@@ -110,10 +112,10 @@ public class ClientInterface {
 		for (Client client : clients) {
 			if (winners.size() == 0) {
 				// No winner
-				client.sendMessage("Draw");
+				client.sendMessage("Draw", servRequest);
 			} else {
 				// List of winners
-				client.sendMessage("Winners : " + winnersList.toString());
+				client.sendMessage("Winners : " + winnersList.toString(), servRequest);
 			}
 		}
 	}
@@ -121,9 +123,10 @@ public class ClientInterface {
 	/**
 	 * Closes the connection for all players.
 	 */
-	public void closeConnections(){
+	public void closeConnections(ServerRequest servRequest){
 		for (Client client : this.playersToClients.values()){
-			client.closeConnection();
+			client.closeConnection(servRequest);
 		}
+		
 	}
 }

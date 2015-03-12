@@ -20,8 +20,10 @@
 
 package main.java.clients.local;
 
-import java.util.Scanner;
+import java.io.IOException;
+
 import main.java.clients.Client;
+import serverComponents.ServerRequest;
 
 /**
  * A local client playing.
@@ -29,23 +31,38 @@ import main.java.clients.Client;
  * @author Cacciatore Celia - Bauduin Raphael
  */
 public class LocalClient implements Client {
-	
-	private final Scanner scanner = new Scanner(System.in);
 
 	@Override
-	public String sendMessageWithAnswer(String receivedMessage) {
-		System.out.println(receivedMessage);
-		String message = this.scanner.nextLine();
+	public String sendMessageWithAnswer(String receivedMessage, ServerRequest servRequest) {
+		System.out.println("OH TU VIENS ?!");
+		servRequest.writer.println(receivedMessage);
+		servRequest.writer.flush();
+		String message = null;
+		try {
+			message = servRequest.reader.readLine();
+		} catch (IOException e) {
+			message = "Unable to read line";
+		}
+		
 		return message;
 	}
 
 	@Override
-	public void sendMessage(String message) {
-		System.out.println(message);
+	public void sendMessage(String message, ServerRequest servRequest) {
+		System.out.println(message + " dans le SendMessage");
+		servRequest.writer.println(message);
+		servRequest.writer.flush();
 	}
 
 	@Override
-	public void closeConnection() {
-		scanner.close();
-	}
+	public void closeConnection(ServerRequest servRequest) {
+		try {
+			servRequest.reader.close();
+			servRequest.writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}	
 }
