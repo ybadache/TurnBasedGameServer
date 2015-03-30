@@ -24,7 +24,6 @@
 
 package serverRequest;
 
-import main.java.games.tictactoe.TicTacToeHost;
 import serverComponents.ServerRequest;
 
 /**
@@ -44,8 +43,6 @@ public class RequestCREATE implements Request {
 			switch (request.query[1]) {
 			case ("tictactoe"):
 				// Using the built game from TurnBasedGame
-				TicTacToeHost tictactoe = new TicTacToeHost();
-				tictactoe.playGame(request);
 				break;
 
 				// Not Yet Implemented: running other games
