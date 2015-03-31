@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Not implemented, but should allow a player to
@@ -37,7 +37,7 @@ public class RequestJOIN implements Request
 {
 
 	@Override
-	public void processRequest(ServerRequest request)
+	public void processRequest(RequestHandler request)
 	{
 		request.writer.flush();
 		request.writer.println("Game joined !");

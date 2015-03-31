@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Treats the EXIT request. Case sensitivity is ON at the moment so the client
@@ -40,7 +40,7 @@ public class RequestEXIT implements Request {
 	 * Closes all the connection to the server and end the client / server link
 	 */
 	@Override
-	public void processRequest(ServerRequest request) {
+	public void processRequest(RequestHandler request) {
 		try {
 			request.requestSocket.close();
 			request.dataWriter.close();

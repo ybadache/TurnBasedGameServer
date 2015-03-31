@@ -58,7 +58,7 @@ public class Server extends Thread {
 			System.out.println("Waiting for client ...");
 			try {
 				this.socket = this.servSocket.accept();
-				new Thread(new ServerRequest(this.socket)).run();
+				new Thread(new RequestHandler(this.socket)).run();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

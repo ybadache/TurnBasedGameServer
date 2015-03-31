@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Creates the right command considering the parameter request.query[0], which
@@ -35,7 +35,7 @@ import serverComponents.ServerRequest;
  */
 public class RequestCreation {
 
-	public void createRequest(ServerRequest request) {
+	public void createRequest(RequestHandler request) {
 		System.out.println(request.query[0]);
 
 		switch (request.query[0]) {

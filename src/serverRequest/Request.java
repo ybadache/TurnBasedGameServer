@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Interfacing a request. It will have a processRequest in any case, so any
@@ -37,6 +37,6 @@ import serverComponents.ServerRequest;
  */
 public interface Request {
 
-	public abstract void processRequest(ServerRequest request);
+	public abstract void processRequest(RequestHandler request);
 
 }

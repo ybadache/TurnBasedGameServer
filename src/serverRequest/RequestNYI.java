@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Sends a message to the client, when he uses a bad command -to correct-
@@ -35,7 +35,7 @@ import serverComponents.ServerRequest;
  */
 public class RequestNYI implements Request {
 	@Override
-	public void processRequest(ServerRequest request)
+	public void processRequest(RequestHandler request)
 	{	
 		request.writer.flush();
 		request.writer.println("Not yet implemented !");

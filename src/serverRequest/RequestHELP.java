@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Not yet implemented ! Should provide help to the client
@@ -36,7 +36,7 @@ import serverComponents.ServerRequest;
 public class RequestHELP implements Request {
 
 	@Override
-	public void processRequest(ServerRequest request) {
+	public void processRequest(RequestHandler request) {
 		
 		return;
 	}	

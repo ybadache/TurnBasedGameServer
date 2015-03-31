@@ -43,7 +43,7 @@ import serverRequest.RequestCreation;
  *
  */
 
-public class ServerRequest implements Runnable {
+public class RequestHandler implements Runnable {
 	/** Socket used by the request to connect to the server */
 	public Socket requestSocket;
 	/** Reader in order to read data sent by the client */
@@ -65,7 +65,7 @@ public class ServerRequest implements Runnable {
 	 * message sent by the 'this.writer.println()', you shall check from the
 	 * scratch for any network problem.
 	 */
-	public ServerRequest(Socket socket) {
+	public RequestHandler(Socket socket) {
 		this.requestSocket = socket;
 		this.gameList = new ArrayList<String>();
 		try {

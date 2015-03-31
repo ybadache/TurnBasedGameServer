@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Treats the CREATE request. Case sensitivity is ON at the moment so the client
@@ -36,7 +36,7 @@ import serverComponents.ServerRequest;
  */
 public class RequestCREATE implements Request {
 	@Override
-	public void processRequest(ServerRequest request) {
+	public void processRequest(RequestHandler request) {
 		// request.query[0] is the command, request.query[1] is the
 		// name of the game that you want to run
 		if (!(request.query[1].isEmpty())) {

@@ -24,7 +24,7 @@
 
 package serverRequest;
 
-import serverComponents.ServerRequest;
+import serverComponents.RequestHandler;
 
 /**
  * Lists the available games on the server that are runnable.
@@ -36,7 +36,7 @@ public class RequestLIST implements Request
 {
 
 	@Override
-	public void processRequest(ServerRequest request)
+	public void processRequest(RequestHandler request)
 	{
 		request.writer.flush();
 		request.writer.println(request.listTheGame());
