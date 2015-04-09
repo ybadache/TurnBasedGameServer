@@ -24,7 +24,12 @@
 
 package serverRequest;
 
+
 import serverComponents.RequestHandler;
+
+import main.java.games.tictactoe.TicTacToeHost;
+//
+
 
 /**
  * Treats the CREATE request. Case sensitivity is ON at the moment so the client
@@ -43,6 +48,8 @@ public class RequestCREATE implements Request {
 			switch (request.query[1]) {
 			case ("tictactoe"):
 				// Using the built game from TurnBasedGame
+				TicTacToeHost tictactoe = new TicTacToeHost();
+				tictactoe.playGame(request);
 				break;
 
 				// Not Yet Implemented: running other games
