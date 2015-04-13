@@ -37,7 +37,9 @@ import serverRequest.RequestCreation;
 
 /**
  * Receives the request sent by the client and treats it by sending it into the
- * Factory pattern. Also has a raw game list initialization .
+ * Factory pattern. Also has a raw game list initialization.
+ * 
+ * Stands for the "CONNECT" state of the machine
  * 
  * @author Yassine Badache
  *

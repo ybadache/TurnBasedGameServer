@@ -27,7 +27,6 @@ package serverRequest;
 
 import serverComponents.RequestHandler;
 
-import main.java.games.tictactoe.TicTacToeHost;
 //
 
 
@@ -45,11 +44,10 @@ public class RequestCREATE implements Request {
 		// request.query[0] is the command, request.query[1] is the
 		// name of the game that you want to run
 		if (!(request.query[1].isEmpty())) {
+			request.query[1] = request.query[1].toLowerCase();
+			
 			switch (request.query[1]) {
 			case ("tictactoe"):
-				// Using the built game from TurnBasedGame
-				TicTacToeHost tictactoe = new TicTacToeHost();
-				tictactoe.playGame(request);
 				break;
 
 				// Not Yet Implemented: running other games
@@ -62,7 +60,7 @@ public class RequestCREATE implements Request {
 			 */
 
 			default:
-				request.writer.println("Unknown game");
+				request.writer.println("Unknown game or bad use of command");
 				break;
 			}
 		}
