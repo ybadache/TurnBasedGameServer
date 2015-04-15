@@ -1,0 +1,92 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{grey}{rgb}{0.9,0.9,0.9}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{amssymb}
+
+\frenchbsetup{StandardLists=true}
+\newcommand{\marge}{18mm}
+\usepackage[left=\marge,right=\marge,top=\marge,bottom=\marge]{geometry}
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\chead{
+   Badache Yassine
+  \hspace{13em}
+  Sujet 70: Serveur de jeux au tour par tour}
+\renewcommand{\headrulewidth}{1pt}
+\linespread{1}
+\setlength{\columnseprule}{0.2pt}
+\definecolor{javakeyword}{rgb}{0,0,0.5}
+\definecolor{javastring}{rgb}{0,0.5,0}
+\definecolor{javacomment}{rgb}{0.5,0.5,0.5}
+\lstdefinestyle{java}{
+   language=Java, basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+   stringstyle=\color{javastring},
+   keywordstyle=\color{javakeyword}\ttfamily\textbf,
+   commentstyle=\color{javacomment}\ttfamily\textit
+ }
+ 
+ \bibliographystyle{plain}
+ \frenchbsetup{StandardLists=true}
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF INFO 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \hypersetup{
+ 	pdfauthor   = {Yassine Badache},
+ 	pdftitle    = {Rapport de PJI (Projet individuel)},
+ 	pdfsubject  = {Serveur de jeux au tour par tour},
+ 	pdfkeywords = {Lille Serveur Jeux Yassine Badache PJI},
+ 	pdfcreator  = {PDFLaTeX},
+ 	pdfproducer = {PDFLaTeX}
+ }
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\author{Yassine Badache}
+\title{}
+\titleformat{\chapter}[hang]{\bf\huge}{\thechapter}{2pc}{}
+\begin{document}
+	
+	\input{cover.tex}
+	\input{thanks.tex}
+
+	\tableofcontents	
+	\newpage
+	\setcounter{page}{1}
+% Début de document
+
+	\input{intro.tex}
+	\input{concept.tex}
+
+% Fin du contenu	
+	
+	
+\end{document}

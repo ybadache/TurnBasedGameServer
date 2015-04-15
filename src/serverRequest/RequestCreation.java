@@ -44,11 +44,6 @@ public class RequestCreation {
 			new RequestLIST().processRequest(request);
 			break;
 
-		case ("create"):
-			System.out.println("create request");
-			new RequestCREATE().processRequest(request);
-			break;
-
 		case ("join"):
 			System.out.println("join request");
 			new RequestJOIN().processRequest(request);
