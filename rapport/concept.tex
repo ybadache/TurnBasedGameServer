@@ -4,9 +4,53 @@ Le programme développé ici est supposé répondre à un besoin bien précis, c
 
 Ci-dessous sont détaillés les scénarios d'usage du logiciel, ainsi que leurs diagrammes de séquence associés. C'est l'ensemble de ces éléments qui nous a permis par la suite de cerner le cœur de ce qui est attendu à la fin de ce sujet.\\
 
+Nous nommerons ici "entité" l'utilisateur: en effet, en plus d'un utilisateur humain, administrateur ou non, une intelligence artificielle devrait également être en mesure d'accéder à notre service afin d'instancier une partie ou rejoindre une partie existante, se confrontant alors à une autre intelligence artificielle ou à un joueur déjà présent en jeu.\\
+
+\newpage
+\begin{figure}[!ht]
+	\center
+	\includegraphics[scale=0.7]{images/sequence/diagramme_scenario1.png}
+	\caption{Le premier cas d'utilisation, basique}
+\end{figure}
+
+\underline{Description}\\
+
+\textit{Une entité souhaite jouer à un jeu. Elle lance donc le client, qui lui permet de se connecter 
+au serveur. Elle entre la commande “list” qui lui permet de voir quels jeux sont disponibles. 
+Parmi eux, elle choisit le TicTacToe, qui est alors instancié du fait qu'aucune partie n'est active. Le serveur lui renvoie l'adresse de jeu, à laquelle l'entité se connecte pour pouvoir jouer.}\\
+
+\vspace{3em}
+Ce cas d'utilisation pose les bases de l'utilisation de notre serveur: on l'utilise principalement pour jouer, et on créé la partie du jeu souhaité si aucune n'est créé.
+\newpage
+
 
 \begin{figure}[!ht]
 	\center
-	\includegraphics[scale=0.5]{images/sequence/diagramme_scenario1.png}
-	\caption{Le premier cas d'utilisation, basique}
+	\includegraphics[scale=0.7]{images/sequence/diagramme_rejoindre.png}
+	\caption{Rejoindre une partie}
 \end{figure}
+
+\underline{Description}\\
+
+\textit{Une entité souhaite jouer à un jeu. Elle lance donc le client, qui lui permet de se connecter 
+	au serveur. Elle entre la commande “list” qui lui permet de voir quels jeux sont disponibles. 
+	Parmi eux, elle choisit de jouer à l'Isola. Des parties étant déjà en cours, le serveur lui renvoie l'adresse d'une des parties, à laquelle l'entité se connecte pour ensuite jouer à l'Isola.}\\
+
+\vspace{3em}
+Ce cas d'utilisation introduit la notion non plus de création d'une instance de jeu, mais bien de connexion à une partie existante. Il faut donc définir des moyens de contrôler et de retenir les jeux étant actuellement instanciés pour pouvoir effectuer la connexion entre le client et le jeu en question.
+\newpage
+
+
+\begin{figure}[!ht]
+	\center
+	\includegraphics[scale=0.7]{images/sequence/diagramme_ajout.png}
+	\caption{Ajout d'un jeu}
+\end{figure}
+
+\underline{Description}\\
+
+\textit{Un administrateur se connecte au service en ligne, via un pseudonyme et mot de passe associés. Il ajoute ensuite un jeu via la commande associée, et le fichier du jeu lui est demandé: il le choisir, et valide son choix. Il choisit un nom pour le jeu choisi, et le serveur stocke ledit fichier dans ses données, mettant  à jour la liste des jeux disponibles. Une fois l'enregistrement effectué, l'administrateur entre la commande 'quit' et se voit déconnecté du serveur.}\\
+
+\vspace{3em}
+
+Ce troisième cas d'utilisation introduit un autre acteur possible, soit l'administrateur. Entrent en compte des problèmes de sécurité liés au statut privilégié, l'enregistrement de fichiers et la saisie de celui-ci.
