@@ -60,6 +60,9 @@ public class RequestHandler implements Runnable {
 	private ArrayList<String> gameList;
 	/** Will receive the query to be cut into parts and treated lately */
 	public String[] query;
+	/** People connected */
+	public int connected = 0;
+	
 
 	/**
 	 * Classic constructor which will initialize all the variables and notices

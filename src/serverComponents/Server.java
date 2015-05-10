@@ -35,8 +35,9 @@ import java.net.Socket;
  *
  */
 public class Server extends Thread {
-	public Socket socket;
-	public ServerSocket servSocket;
+	private Socket socket;
+	private ServerSocket servSocket;
+	public int connected = 0;
 
 	/**
 	 * Initialization of the server socket's port.
@@ -58,7 +59,8 @@ public class Server extends Thread {
 			System.out.println("Waiting for client ...");
 			try {
 				this.socket = this.servSocket.accept();
-				new Thread(new RequestHandler(this.socket)).run();
+				this.connected++;
+				new Thread(new RequestHandler(this.socket)).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -81,4 +83,10 @@ public class Server extends Thread {
 	public void setServSocket(ServerSocket servSocket) {
 		this.servSocket = servSocket;
 	}
+	
 }
+	 class WaitingRoom
+	 {
+		 
+	 }
+

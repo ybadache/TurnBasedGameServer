@@ -24,6 +24,16 @@
 
 package serverRequest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
 import serverComponents.RequestHandler;
 
 /**
@@ -35,13 +45,29 @@ import serverComponents.RequestHandler;
  */
 public class RequestJOIN implements Request
 {
-
 	@Override
-	public void processRequest(RequestHandler request)
+	public void processRequest (RequestHandler request)
 	{
 		request.writer.flush();
-		request.writer.println("Game joined !");
+		request.writer.println("Connected: " + request.connected);
 		request.writer.flush();
+		
+		// System.out.println(System.getenv());
+		
+		String[] command = {"CMD", "/C", "TicTacToe.jar"};
+		
+		ProcessBuilder pb = new ProcessBuilder (command);
+		
+		try {
+			Process p = pb.start();
+			pb.inheritIO();
+		
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return;
 	}
 
