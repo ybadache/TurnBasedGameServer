@@ -33,7 +33,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import serverRequest.RequestCreation;
+import serverRequestTreatment.RequestCreation;
 
 /**
  * Receives the request sent by the client and treats it by sending it into the
@@ -62,6 +62,7 @@ public class RequestHandler implements Runnable {
 	public String[] query;
 	/** People connected */
 	public int connected = 0;
+	public RequestCreation creator = new RequestCreation();
 	
 
 	/**
@@ -70,7 +71,7 @@ public class RequestHandler implements Runnable {
 	 * message sent by the 'this.writer.println()', you shall check from the
 	 * scratch for any network problem.
 	 */
-	public RequestHandler(Socket socket) {
+	public RequestHandler(Socket socket, int connected) {
 		this.requestSocket = socket;
 		this.gameList = new ArrayList<String>();
 		try {
@@ -131,9 +132,9 @@ public class RequestHandler implements Runnable {
 		while ((input = reader.readLine()) != "exit") {
 			// Splitting the command and sending the request to the factory
 			this.query = input.split("\\s+");
-			new RequestCreation().createRequest(this);
-		}
+			creator.createRequest(this);
 
+		}
 	}
 
 	public Socket getRequestSocket() {

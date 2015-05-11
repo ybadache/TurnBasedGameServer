@@ -22,17 +22,9 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package serverRequest;
+package serverRequestTreatment;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.Arrays;
 
 import serverComponents.RequestHandler;
 
@@ -55,20 +47,23 @@ public class RequestJOIN implements Request
 		// System.out.println(System.getenv());
 		
 		String[] command = {"CMD", "/C", "TicTacToe.jar"};
-		
 		ProcessBuilder pb = new ProcessBuilder (command);
 		
 		try {
 			Process p = pb.start();
 			pb.inheritIO();
 		
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		return;
+	}
+
+	@Override
+	public void treatError() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

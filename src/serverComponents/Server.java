@@ -23,9 +23,15 @@
 
 package serverComponents;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Is used as a starting point for all the clients, with multi-thread
@@ -37,7 +43,6 @@ import java.net.Socket;
 public class Server extends Thread {
 	private Socket socket;
 	private ServerSocket servSocket;
-	public int connected = 0;
 
 	/**
 	 * Initialization of the server socket's port.
@@ -59,8 +64,8 @@ public class Server extends Thread {
 			System.out.println("Waiting for client ...");
 			try {
 				this.socket = this.servSocket.accept();
-				this.connected++;
-				new Thread(new RequestHandler(this.socket)).start();
+				Thread t = new Thread(new IDBean (this.socket));
+				t.start();	
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -83,10 +88,4 @@ public class Server extends Thread {
 	public void setServSocket(ServerSocket servSocket) {
 		this.servSocket = servSocket;
 	}
-	
 }
-	 class WaitingRoom
-	 {
-		 
-	 }
-
