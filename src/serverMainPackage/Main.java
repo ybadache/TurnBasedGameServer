@@ -40,6 +40,7 @@ public class Main {
 		server.init(2121);
 		server.run();
 		system.out.println("Be brave !");
+		system.out.println("Changing again");
 	}
 
 }
