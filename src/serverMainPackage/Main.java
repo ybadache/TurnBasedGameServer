@@ -39,6 +39,7 @@ public class Main {
 		Server server = new Server();
 		server.init(2121);
 		server.run();
+		system.out.println("Be brave !");
 	}
 
 }
